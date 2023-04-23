@@ -15,6 +15,10 @@ class ExchangeForm(StatesGroup):
 
 async def weather(city_name: str) -> str:
     '''
+    An asynchronous function that makes a request for
+    API OpenWeatherAPI and returns
+    degrees Celsius
+
     Асинхронная функция, которая делает запрос по 
     API OpenWeatherAPI и возвращает 
     градусы цельсия
@@ -35,6 +39,10 @@ async def weather(city_name: str) -> str:
     return data
 
 '''
+We take a variable from the environment.
+In order to create a variable in Windows, you need to register the command in cmd
+set TOKEN="Your_bot_token"
+
 Берем переменную из окружения.
 Для того, чтобы создать переменную в Windows, нужно в cmd прописать команду
 set TOKEN="Токен_вашего_бота"
@@ -88,6 +96,8 @@ async def startMessage(message: types.Message):
 @dp.message_handler(Text(equals='Вернуться назад', ignore_case=True), state='*')
 async def cancelState(message: types.Message, state: FSMContext):
     '''
+    Allows the user to exit states
+
     Позволяет пользователю выйти из состояний
     '''
     current_state = await state.get_state()
@@ -100,6 +110,8 @@ async def cancelState(message: types.Message, state: FSMContext):
 @dp.message_handler(state=ExchangeForm.сurrency_from)
 async def process_currency_from(message: types.Message, state: FSMContext):
     """
+    Currency selection (from which one to convert)
+
     Выбор валюты (из какой нужно конвертировать)
     """
     if message.text not in list_cur:
@@ -114,6 +126,8 @@ async def process_currency_from(message: types.Message, state: FSMContext):
 @dp.message_handler(state=ExchangeForm.currency_to)
 async def process_gender(message: types.Message, state: FSMContext):
     """
+    Choice of currency (to which you want to convert)
+
     Выбор валюты (в какую нужно конвертировать)
     """
 
